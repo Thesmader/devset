@@ -1,0 +1,13 @@
+- name: Clone Flutter
+  ansible.builtin.git:
+    repo: 'https://github.com/flutter/flutter.git'
+    dest: "{{ lookup('env', 'HOME') }}/dev/env"
+  tags:
+    - install
+    - flutter
+- name: Add Flutter to Path
+  lineinfile:
+    path: "{{ lookup('env', 'HOME') }}/.config/zsh/.zshrc"
+    line: "export PATH=$PATH:{{ flutterPath }}"
+  vars:
+    flutterPath: "{{ lookup('env', 'HOME') }}/dev/env/flutter"

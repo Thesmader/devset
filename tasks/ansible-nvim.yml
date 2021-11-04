@@ -1,0 +1,18 @@
+- name: Clone Neovim
+  ansible.builtin.git:
+    repo: 'https://github.com/neovim/neovim.git'k
+    dest: "{{ lookup('env', 'HOME') }}/Installs/neovim"
+  tags:
+    - install
+    - neovim
+- name: Build neovim
+  shell: "cd {{ lookup('env', 'HOME') }}/Installs/neovim && make CMAKE_EXTRA_FLAGS=\"-DCMAKE_INSTALL_PREFIX=$HOME/neovim -DCMAKE_BUILD_TYPE=Release\""
+  tags:
+    - install
+    - neovim
+- name: Install neovim
+  become: true
+  shell: "cd {{ lookup('env', 'HOME') }}/Installs/neovim && make install"
+  tags:
+    - install
+    - neovim
