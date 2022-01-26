@@ -1,11 +1,12 @@
 - hosts: localhost
-  become: yes
   vars:
     GOOS: linux
     GOARCH: amd64
     go_version: 1.17.2
     GOPATH: "{{ lookup('env', 'HOME') }}/go"
-  roles:
-    - fubarhouse.golang
+  #roles:
+    #- fubarhouse.golang
   tasks:
-    - include: tasks/ansible-nvim.yml
+    - include: tasks/flutter.yml
+    #- include: tasks/ansible-nvim.yml
+    #- include: tasks/elixir.yml

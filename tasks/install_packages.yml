@@ -1,0 +1,5 @@
+- name: Install elixir using pacman
+  community.general.pacman:
+    name: elixir
+    state: present
+  become: yes

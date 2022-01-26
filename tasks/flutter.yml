@@ -1,5 +1,5 @@
 - name: Clone Flutter
-  ansible.builtin.git:
+  git:
     repo: 'https://github.com/flutter/flutter.git'
     dest: "{{ lookup('env', 'HOME') }}/dev/env"
   tags:
