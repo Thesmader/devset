@@ -3,7 +3,10 @@
     GOOS: linux
     GOARCH: amd64
     go_version: 1.17.2
-    GOPATH: "{{ lookup('env', 'HOME') }}/go"
+    home: "{{ lookup('env', 'HOME')}}"
+    GOPATH: "{{ home }}/go"
+    android_home: "{{ home }}/dev/env/android"
+    sdk_dl_link: https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip
   #roles:
     #- fubarhouse.golang
   tasks:

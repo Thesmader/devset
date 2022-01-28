@@ -1,0 +1,19 @@
+- name: Create android directory
+  file:
+    path: {{ android_home }}
+    state: directory
+- name: Download android commandline tools
+  shell: "cd {{ android_home }} && wget {{ sdk_dl_link }}"
+- name: Unzip sdk
+  shell: "unzip $(ls)"
+- name: Remove the zip file
+  shell: "rm $(ls | grep commandline)"
+- name: Setup android tools directory
+  file:
+    path: "{{ android_home }}/cmdline-tools/tools"
+    state: directory
+  shell: "cd {{ android_home }}/cmdline-tools && mv -i * tools"
+- name: Accept Android SDK licenses
+  shell: "yes | sdkmanager --licenses"
+- name: Install platform-tools platforms;android-31 build-tools;31.0.0
+  shell: "sdkmanager --install \"platform-tools\" \"platforms;android-31\" \"build-tools;31.0.0\""

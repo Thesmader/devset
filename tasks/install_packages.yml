@@ -1,5 +1,23 @@
-- name: Install elixir using pacman
-  community.general.pacman:
-    name: elixir
-    state: present
+- name: Install packages: git curl wget unzip gotop openjdk
   become: yes
+  community.general.pacman:
+    name:
+      - git
+      - curl
+      - wget
+      - unzip
+      - gotop
+      - jdk8-openjdk
+      - zsh
+      - stow
+      - brave-browser
+      - flameshot
+      - alacritty
+      - pavucontrol
+      - pcmanfm
+      - github-cli
+    state: present
+- name: Install n
+  shell: "curl -L https://git.io/n-install | bash"
+- name: Install nodejs
+  shell: "n lts"

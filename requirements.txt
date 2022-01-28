@@ -1,0 +1,11 @@
+- golang
+- node
+- npm
+- some node version manager
+- neovim
+- git
+- ssh keys
+- vim plug
+- dotfiles
+- gotop
+- fvm

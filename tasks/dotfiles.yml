@@ -1,0 +1,15 @@
+- name: Cloning .dotfiles
+  ansible.builtin.git:
+    repo: 'git@github.com:Thesmader/.dotifiles.git'
+    dest: "{{ home }}/.dotfiles"
+  tags:
+    - install
+    - dotfiles
+    - stow
+
+- name: Stow .dotfiles
+  shell: cd $HOME/.dotfiles && ./stow_folders
+  tags:
+    - install
+    - dotfiles
+    - stow
