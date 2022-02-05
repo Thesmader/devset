@@ -1,0 +1,2 @@
+- name: Install dart global packages.
+  shell: "cat ./dart_pkgs | xargs -n1 dart pub global activate"
