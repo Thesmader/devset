@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -e
+
+if ! [ -x "$(command -v brew)" ]; then
+	bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+fi
+
+if ! [ -x "$(command -v fvm)" ]; then
+	brew tap leoafarias/fvm
+	brew install fvm
+fi
+
+cat brew_pkgs | xargs brew install
+
+sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-11.jdk
+
+if ! [ -x "$(command -v nvim)" ]; then
+	brew install neovim --HEAD
+fi
+
+ansible-playbook main.yml --ask-vault-pass

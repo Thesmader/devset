@@ -1,0 +1,2 @@
+- name: Install n
+  shell: "curl -L https://bit.ly/n-install | bash -s -- -y"

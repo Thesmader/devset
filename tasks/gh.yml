@@ -1,0 +1,2 @@
+- name: Login for Github CLI
+  shell: "echo {{ gh_auth_token }} | gh auth login --with-token"

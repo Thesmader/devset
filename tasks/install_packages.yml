@@ -17,7 +17,3 @@
       - pcmanfm
       - github-cli
     state: present
-- name: Install n
-  shell: "curl -L https://git.io/n-install | bash"
-- name: Install nodejs
-  shell: "n lts"

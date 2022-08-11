@@ -3,13 +3,24 @@
     GOOS: linux
     GOARCH: amd64
     go_version: 1.17.2
+    source_ssh: "./.ssh/id_ed25519"
+    dest_ssh: "{{ lookup('env', 'HOME') }}/.ssh/id_ed25519"
     home: "{{ lookup('env', 'HOME')}}"
     GOPATH: "{{ home }}/go"
     android_home: "{{ home }}/dev/env/android"
-    sdk_dl_link: https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip
-  #roles:
-    #- fubarhouse.golang
+    sdk_dl_link: https://dl.google.com/android/repository/commandlinetools-mac-8512546_latest.zip
+    gh_auth_token: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          65616438666665356532313635363236663631326431643834333663303734376166396130323132
+          6639623832383233646531396466326630356134633962350a613635616437323130656562313561
+          61383134366134366332333463343762303634343238656233633938613439613238393335366131
+          3936666461396339660a633863323762396562363564623466633135616237633430626262336661
+          39623865653637653532643064343230393263333133663335393633386433386563663663386561
+          6334306439663465393762303532373337326266323361373261
   tasks:
-    - include: tasks/flutter.yml
-    #- include: tasks/ansible-nvim.yml
-    #- include: tasks/elixir.yml
+    - include_tasks: tasks/ssh.yml
+    - include_tasks: tasks/dotfiles.yml
+    - include_tasks: tasks/android_sdk.yml
+    - include_tasks: tasks/dart_global_packages.yml
+    - include_tasks: tasks/node.yml
+    - include_tasks: tasks/gh.yml

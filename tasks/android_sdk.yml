@@ -1,19 +1,21 @@
 - name: Create android directory
   file:
-    path: {{ android_home }}
+    path: "{{ android_home }}"
     state: directory
 - name: Download android commandline tools
-  shell: "cd {{ android_home }} && wget {{ sdk_dl_link }}"
+  shell: "cd {{ android_home }} && curl {{ sdk_dl_link }} > cmdline-tools.zip"
 - name: Unzip sdk
-  shell: "unzip $(ls)"
+  shell: "cd {{android_home }} && unzip cmdline-tools.zip"
 - name: Remove the zip file
-  shell: "rm $(ls | grep commandline)"
+  shell: "cd {{android_home }} && rm cmdline-tools.zip"
 - name: Setup android tools directory
   file:
-    path: "{{ android_home }}/cmdline-tools/tools"
+    path: "{{ android_home }}/cmdline-tools/latest"
     state: directory
-  shell: "cd {{ android_home }}/cmdline-tools && mv -i * tools"
+- name: Ready android home
+  shell: "cd {{ android_home }}/cmdline-tools && mv -i * latest"
+  ignore_errors: yes
 - name: Accept Android SDK licenses
-  shell: "yes | sdkmanager --licenses"
+  shell: "yes | {{ android_home }}/cmdline-tools/latest/bin/sdkmanager --licenses"
 - name: Install platform-tools platforms;android-31 build-tools;31.0.0
-  shell: "sdkmanager --install \"platform-tools\" \"platforms;android-31\" \"build-tools;31.0.0\""
+  shell: "{{android_home}}/cmdline-tools/latest/bin/sdkmanager --install \"platform-tools\" \"platforms;android-31\" \"build-tools;31.0.0\""
