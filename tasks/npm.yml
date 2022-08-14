@@ -1,0 +1,24 @@
+- name: Install emmet-ls
+  npm:
+    name: emmet-ls
+    global: yes
+- name: Install prettierd
+  npm:
+    name: "@fsouza/prettierd"
+    global: yes
+- name: Install tailwind css ls
+  npm:
+    name: "@tailwindcss/language-server"
+    global: yes
+- name: Install svelte ls
+  npm:
+    name: svelte-language-server
+    global: yes
+- name: Install typescript ls
+  npm:
+    name: typescript-language-server
+    global: yes
+- name: Install yarn
+  npm:
+    name: yarn
+    global: yes
